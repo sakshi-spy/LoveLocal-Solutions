@@ -1,0 +1,92 @@
+*******************************************************************************************************************************************************************************************************************
+
+Question:--
+Hard 2 
+You are given a string s. You can convert s to a 
+palindrome by adding characters in front of it.
+Return the shortest palindrome you can find by performing this transformation.
+ 
+Example 1:
+Input: s = "aacecaaa"
+Output: "aaacecaaa"
+
+Example 2:
+Input: s = "abcd"
+Output: "dcbabcd"
+ 
+Constraints:
+0 <= s.length <= 5 * 104
+s consists of lowercase English letters only.
+
+***********************************************************************************************************************************************************************************************************************
+
+Solution :--
+
+import java.util.Scanner;
+
+public class ShortestPalindrome {
+
+   public static String shortestPalindrome(String s) {
+    int n = s.length();
+    String rev = new StringBuilder(s).reverse().toString();
+    for (int i = 0; i < n; i++) {
+        if (s.substring(0, n - i).equals(rev.substring(i))) {
+            return rev.substring(0, i) + s;
+        }
+    }
+    return s;
+}
+
+
+    private static int[] computeLPS(String s) {
+        int n = s.length();
+        int[] lps = new int[n];
+        int len = 0;
+        int i = 1;
+
+        while (i < n) {
+            if (s.charAt(i) == s.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len != 0) {
+                    len = lps[len - 1];
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        return lps;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        String result = shortestPalindrome(s);
+        System.out.println( result);
+        scanner.close();
+    }
+}
+
+****************************************************************************************************************************************************************************************************************
+
+Explaination:--
+
+***Import Statements*** : Scanner: A class that provides methods for parsing primitive types and strings using regular expressions.
+
+***shortestPalindrome Method***: Input: A string s.
+                                 Output: The shortest palindrome that can be formed by adding characters in front of the given string s.
+                                 This method uses a simple approach to find the shortest palindrome:
+                                 It reverses the input string s to create rev.
+                                 It then iterates through s and compares substrings from the beginning of s with reversed substrings.
+                                 When a match is found, it means that the remaining part of the reversed string should be added to the original string to form the shortest palindrome.
+
+***computeLPS Method***: Input: A string s.
+                         Output: An array representing the Longest Prefix Suffix (LPS) for each position in the string.
+                         This method computes the Longest Prefix Suffix (LPS) array for a given string. The LPS array is crucial in pattern matching algorithms.
+
+***main Method***: The main method is the entry point of the program.
+                   It takes user input for a string s using a Scanner.
+                   It then calls the shortestPalindrome method and prints the result.
