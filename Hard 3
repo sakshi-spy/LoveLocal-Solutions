@@ -1,0 +1,72 @@
+*********************************************************************************************************************************************************************************************************************
+
+Question :--
+Hard 3
+Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
+
+Example 1:
+Input: n = 13
+Output: 6
+
+Example 2:
+Input: n = 0
+Output: 0
+ 
+Constraints:
+0 <= n <= 109
+
+*********************************************************************************************************************************************************************************************************************
+
+Solution :--
+
+import java.util.Scanner;
+
+public class CountDigitOne {
+    public static int countDigitOne(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        int count = 0;
+        long factor = 1; 
+
+        while (n / factor != 0) {
+            long currentDigit = (n / factor) % 10;
+            long before = n / (factor * 10);
+            long after = n - (n / factor) * factor;
+            if (currentDigit == 0) {
+                count += before * factor;
+            } else if (currentDigit == 1) {
+                count += before * factor + after + 1;
+            } else {
+                count += (before + 1) * factor;
+            }
+            factor *= 10;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the value of n:");
+        int n = scanner.nextInt();
+        int result = countDigitOne(n);
+        System.out.println( result);
+        scanner.close();
+    }
+}
+
+**************************************************************************************************************************************************************************************************************
+
+Explaination :--
+
+***Import Statements*** Scanner: A class that provides methods for parsing primitive types and strings using regular expressions.
+
+***countDigitOne Method*** : This method takes an integer n as input and calculates the total number of digit 1s in all non-negative integers less than or equal to n.
+                             The method uses a loop to iterate through each digit place, starting from the units place (factor = 1) and moving towards higher digit places.
+                             For each digit place, it calculates the number of 1s contributed by that place and updates the count.
+                             The loop continues until the highest digit place of n.
+
+***main Method***:This method serves as the entry point of the program.
+                  It creates a Scanner object to take input from the console.
+                  It prompts the user to enter the value of n.
+                  It then calls the countDigitOne method with the user-provided n and prints the result.
