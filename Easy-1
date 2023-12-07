@@ -1,0 +1,71 @@
+*******************************************************************************************************************************************
+
+Question :---
+Easy 1
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+A word is a maximal 
+substring consisting of non-space characters only.
+
+1 <= s.length <= 104
+s consists of only English letters and spaces ' '.
+There will be at least one word in s.
+
+Sample input and outputs:
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+
+Input: s = "luffy is still joyboy"
+Output: 6
+Explanation: The last word is "joyboy" with length 6.
+
+*************************************************************************************************************************************************
+
+Solution:
+
+import java.util.*;
+public class LengthOfLastWord {
+    public static int lengthOfLastWord(String s) {
+        s = s.trim();
+        int lastSpaceIndex = s.lastIndexOf(' ');
+        return s.length() - lastSpaceIndex - 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String input = sc.nextLine();
+        int result = lengthOfLastWord(input);
+        System.out.println(result);
+    }
+}
+
+
+*************************************************************************************************************************************************
+
+Explanation:
+
+***import java.util.*** : This is a Java import statement. It is used to make all the classes and interfaces of the java.util package available in the current Java source file.
+                          In our Program we used this for Scanner Class.
+
+***lengthOfLastWord(String s)*** : The method public static int lengthOfLastWord(String s) is a Java method that calculates and returns the length of the last word in a given string s.
+                                  s.trim(): This trims any leading or trailing spaces from the input string.
+                                  s.lastIndexOf(' '): This finds the last index of the space character in the trimmed string. This index is the position of the last space before the last word.
+                                  s.length() - lastSpaceIndex - 1: This calculates the length of the last word by taking the difference between the length of the trimmed string and the index of the last space,
+                                                                   and then subtracting 1. The subtraction of 1 is necessary because the indices in Java are zero-based.
+
+
+***public static void main(String[] args)*** : This is the main Method in which inputs will be taken and output will be printed.
+                                             Scanner sc=new Scanner(System.in);: This line creates a Scanner object named sc, which is used to read input from the console. 
+                                                        System.in represents the standard input stream (console input).
+                                             String input = sc.nextLine();: This line reads a line of text from the console using the Scanner object sc and stores it in a String variable named input. 
+                                                                            This line is waiting for the user to input a line of text and press Enter.
+                                             int result = lengthOfLastWord(input);: This line calls a method named lengthOfLastWord and passes the user input (input variable) as an argument. 
+                                                                                    The result of this method call (the length of the last word) is stored in an int variable named result.
+                                             System.out.println(result);: This line prints the value of the result variable to the console using System.out.println. 
+                                                                          It displays the length of the last word that was calculated in the previous step.
+
+
